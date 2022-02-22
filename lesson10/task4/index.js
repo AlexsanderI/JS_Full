@@ -1,12 +1,12 @@
-const getMaxAbsoluteNumber = arr => {
-     if (!Array.isArray(arr)) {
+const getMaxAbsoluteNumber = (arr) => {
+  if (!Array.isArray(arr)) {
     return null;
   }
   if (arr[0] === undefined) {
     return null;
   }
- const arrIt = arr.map((num)=>Math.abs(num));
- return Math.max(...arrIt);
+  const arrIt = arr.map((num) => Math.abs(num));
+  return Math.min(...arrIt);
 };
 
 // examples
