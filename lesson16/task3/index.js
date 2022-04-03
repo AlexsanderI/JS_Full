@@ -1,40 +1,31 @@
-// make a array
-// text devidi by part 
-// itaration text
-// if length = 0, stop itaration
-// put string ilength by len
-// if length less lenn add point
-// return array
-// if text not array return null
+let arr = [];
 
+for (let i = 0; i < 10; i += 1) {
+  arr[i] = function () {
+    return i;
+  };
+}
 
+console.log(arr[5]());
 
-const splitString = (text, len=10) => {
-    const strArr = [];
-    let startPosition = 0;
-    if (typeof text !== 'string') {
-        return null;
-    }
-    while (true) {
-        let chunk = text.substr(startPosition, len);
-          if (chunk.length === 0) {
-            break;
-        }
-        strArr.push(chunk[0] + chunk.slice(1));
-      startPosition += len
-    }
-     let point = strArr[strArr.length - 1];
-  if (point.length < len) {
-    while (point.length < len) {
-      point += ".";
-    }
+// export
+const createArrayOfFunctions = (number) => {
+  const arr = [];
+
+  if (number === undefined) {
+    return arr;
   }
-  strArr[strArr.length - 1] = point;
-    return strArr;
+  if (typeof number !== "number") {
+    return null;
+  }
+  for (let i = 0; i < number; i += 1) {
+    arr[i] = function () {
+      return i;
+    };
+  }
+  return arr;
 };
 
-console.log(splitString('abcdefg', 4));
-console.log(splitString('abcdefgwqertytyyu', ));
-console.log(splitString('abcdefgqwerty', 4));
-console.log(splitString(2, 4));
-
+console.log(createArrayOfFunctions(6)[3]());
+console.log(createArrayOfFunctions("d"));
+console.log(createArrayOfFunctions());

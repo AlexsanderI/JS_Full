@@ -1,44 +1,75 @@
-// function countOccurrences(text, str) {
-//   if (str === "") {
-//     return null;
-//   }
-//   let counter = 0;
-//   let underLine = text;
-//   while (true) {
-//     if (text.indexOf(str) === -1) {
-//       break;
-//     }
-
-//     const index = underLine.indexOf(str);
-
-//     underLine = underLine.slice(index + 1);
-
-//     counter += 1;
-
-//     if (underLine.indexOf(str) < 0) {
-//       break;
-//     }
-//   }
-//   return counter;
-// }
-
-// console.log(countOccurrences(1, 1));
-
-
-// const string = 'Today, not tomorrow, good day to sleep';
-
-const countOccurrences = (text, str) => {
-  const newText = text.split(' ');
-  let fine = 0;
-  if (str.length === 0) {
-    return null;
-  }
-  newText.forEach(element => {
-    if (element.includes(str) === true) {
-      fine += 1;
-    }
-  });
-  return fine;
+/* ===> 1 <=== */
+const student = {
+  name: "Tom",
 };
 
-console.log(countOccurrences('my name', 'm'));
+function sayName() {
+  console.log(this.name);
+}
+
+// вызовите ф-цию sayName так, чтобы в консоль вывелось имя студента
+// ... your code here
+sayName.apply(student);
+// вызовите ф-цию sayName так, чтобы в консоль вывелось имя 'Bruce' (используйте другой объект)
+// ... your code here
+sayName.apply({ name: "Bruce" });
+/* ===> 2 <=== */
+const company = {
+  companyName: "Microsoft",
+};
+
+function greeting(firstName, lastName) {
+  console.log(
+    `Hello, ${firstName} ${lastName}. Welcome to the ${this.companyName}`
+  );
+}
+
+// вызовите ф-цию greeting так, чтобы в консоль вывелось
+// 'Hello, Bob Marley. Welcome to the Microsoft'
+// используйте объект company
+// ... your code here
+greeting.apply(company, ["Bob", "Marley"]);
+/* ===> 3 <=== */
+const country = {
+  countryName: "Ukraine",
+  capital: "Kyiv",
+};
+
+function getPopulation(population) {
+  return `Population in ${this.countryName} is ${population}`;
+}
+
+// вызовите ф-цию getPopulation так, чтобы она вернула
+// 'Population in Ukraine is 43000'
+// 43000 передавайте в виде числа
+// используйте объект country
+// результат работы ф-ции getPopulation присвойте в переменную и выведите в консоль
+// ... your code here
+const result = getPopulation.apply(country, [43000]);
+console.log(result);
+
+/* ===> 4 <=== */
+const transaction = {
+  amount: 1200,
+  operation: "sell",
+  currency: "USD",
+  exchange: "NYSE",
+  printTransaction() {
+    console.log(
+      `${this.amount} ${this.currency} - ${this.operation} on ${this.exchange}`
+    );
+  },
+};
+
+const anotherTransaction = {
+  amount: 400,
+  operation: "buy",
+  currency: "USD",
+  exchange: "NASDAQ",
+};
+
+// вызовите метод transaction.printTransaction так, чтобы в консоль вывелось
+// '400 USD - buy on NASDAQ'
+// используйте объект anotherTransaction как контекст
+// ... your code here
+transaction.printTransaction.apply(anotherTransaction);

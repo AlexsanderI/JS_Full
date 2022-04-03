@@ -1,41 +1,26 @@
-// add second argument
-// if false return sort argumen from las simvol
-//  else return reverse
-// if not array retur null
+// add: recive number and add
+// decrease: recive number and subtract from member a number
+// reset: return 0
+//make memo -  getMemo: return function
 
+const createCalculator = () => {
+  let member = 3;
+  const add = (namb) => {
+    return (member = namb + member);
+  };
+  const decrease = (namb) => (member = member - namb);
+  const reset = () => (member = 0);
+  const getMemo = () => member;
+  return {
+    add,
+    decrease,
+    reset,
+    getMemo,
+  };
+};
 
-
-
-const sortContacts = (contact, alfa) =>{
-      if (!Array.isArray(contact)) {
-    return null;
-  } if (alfa === false){
-    return contact.sort((a,b)=> b.name.localeCompare(a.name));
-  }
-  return contact.sort((a,b)=> a.name.localeCompare(b.name));
-    // return result;
-}
-const contacts =[
-    {
-        name:'Tom', 
-        phoneNumber: '777-77-77',
-    },
- {
-        name:'lom', 
-        phoneNumber: '777-77-77',
-    },
-     {
-        name:'Alex', 
-        phoneNumber: '777-77-77',
-    },
-     {
-        name:'AAlex', 
-        phoneNumber: '777-77-77',
-    },
-     {
-        name:'Elen', 
-        phoneNumber: '777-77-77',
-    },
-];
-
-console.log(sortContacts(contacts, false ));
+// console.log(member);
+const messanger1 = createCalculator();
+console.log(messanger1.add(3));
+console.log(messanger1.decrease(3));
+console.log(messanger1.reset(5));

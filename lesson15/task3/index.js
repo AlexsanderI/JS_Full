@@ -1,40 +1,74 @@
-// make a array
-// text devidi by part 
-// itaration text
-// if length = 0, stop itaration
-// put string ilength by len
-// if length less lenn add point
-// return array
-// if text not array return null
+// creat function createLogger
+// creat in function memory massage
+"use strict";
 
-
-
-const splitString = (text, len=10) => {
-    const strArr = [];
-    let startPosition = 0;
-    if (typeof text !== 'string') {
-        return null;
-    }
-    while (true) {
-        let chunk = text.substr(startPosition, len);
-          if (chunk.length === 0) {
-            break;
-        }
-        strArr.push(chunk[0] + chunk.slice(1));
-      startPosition += len
-    }
-     let point = strArr[strArr.length - 1];
-  if (point.length < len) {
-    while (point.length < len) {
-      point += ".";
-    }
+const createLogger = () => {
+  const memoryLoggers = [];
+  function warn(text) {
+    const warnMessage = {
+      message: text,
+      dateTime: new Date(),
+      type: "warn",
+    };
+    memoryLoggers.push(warnMessage);
   }
-  strArr[strArr.length - 1] = point;
-    return strArr;
+
+  function error(text) {
+    const errorMessage = {
+      message: text,
+      dateTime: new Date(),
+      type: "error",
+    };
+    memoryLoggers.push(errorMessage);
+  }
+
+  function log(text) {
+    const logMessage = {
+      message: text,
+      dateTime: new Date(),
+      type: "log",
+    };
+    memoryLoggers.push(logMessage);
+  }
+
+  const getRecords = (loggerType = "not Found") => {
+    if (loggerType !== "not Found") {
+      const memoryFilter = memoryLoggers.filter((element) => {
+        if (element.type === loggerType) {
+          return element;
+        }
+      });
+      return memoryFilter.sort((a, b) => b.dateTime - a.dateTime);
+    }
+    return memoryLoggers.sort((a, b) => b.dateTime - a.dateTime);
+  };
+
+  return {
+    warn,
+    error,
+    log,
+    getRecords,
+  };
 };
 
-console.log(splitString('abcdefg', 4));
-console.log(splitString('abcdefgwqertytyyu', ));
-console.log(splitString('abcdefgqwerty', 4));
-console.log(splitString(2, 4));
+// examples
+const logger1 = createLogger();
+logger1.log("User logged in");
+logger1.warn("User is tring to ented restricted page");
+logger1.log("User logged out");
+logger1.error("Unexpected error on the site");
 
+console.log(logger1.getRecords()); // ===> [{ message: 'Unexpected error on the site', type: 'error', dateTime: Date }, { message: 'User logged out', type: 'log', dateTime: Date }, { message: 'User is tring to ented restricted page', type: 'warn', dateTime: Date }, { message: 'User logged in', type: 'log', dateTime: Date }]
+console.log(logger1.getRecords("log")); // ===> [{ message: 'User logged out', type: 'log', dateTime: Date }, { message: 'User logged in', type: 'log', dateTime: Date }]
+console.log(logger1.getRecords("error")); // ===> [{ message: 'Unexpected error on the site', type: 'error', dateTime: Date }]
+console.log(logger1.getRecords("warn")); // ===> [{ message: 'User is tring to ented restricted page', type: 'warn', dateTime: Date }]
+
+const logger2 = createLogger();
+logger2.warn("Opps, something is happenning");
+console.log(logger2.getRecords("error")); // ===> []
+console.log(logger2.getRecords("warn")); // ===> [{ message: 'Opps, something is happenning', type: 'warn', dateTime: Date }]
+console.log(logger2.getRecords()); // ===> [{ message: 'Opps, something is happenning', type: 'warn', dateTime: Date }]
+
+const logger3 = createLogger();
+console.log(logger3.getRecords("error")); // ===> []
+console.log(logger3.getRecords()); // ===> []

@@ -1,41 +1,40 @@
-// add second argument
-// if false return sort argumen from las simvol
-//  else return reverse
-// if not array retur null
+"use strict";
 
+export default function createMessenger() {
+  let message = "Just learn it";
+  let sender = "Gromcode";
 
-
-
-const sortContacts = (contact, alfa) =>{
-      if (!Array.isArray(contact)) {
-    return null;
-  } if (alfa === false){
-    return contact.sort((a,b)=> b.name.localeCompare(a.name));
+  function sendMessage(name) {
+    console.log(
+      `Hello, ${name}! ${message}! This message was sent by ${sender}`
+    );
   }
-  return contact.sort((a,b)=> a.name.localeCompare(b.name));
-    // return result;
-}
-const contacts =[
-    {
-        name:'Tom', 
-        phoneNumber: '777-77-77',
-    },
- {
-        name:'lom', 
-        phoneNumber: '777-77-77',
-    },
-     {
-        name:'Alex', 
-        phoneNumber: '777-77-77',
-    },
-     {
-        name:'AAlex', 
-        phoneNumber: '777-77-77',
-    },
-     {
-        name:'Elen', 
-        phoneNumber: '777-77-77',
-    },
-];
 
-console.log(sortContacts(contacts, false ));
+  function setMessage(text) {
+    message = text;
+  }
+  function setSender(text) {
+    sender = text;
+  }
+
+  return {
+    sendMessage,
+    setMessage,
+    setSender,
+  };
+
+  // put your code here
+}
+
+// examples
+const messanger1 = createMessenger();
+messanger1.sendMessage("Anna"); // ===> Hello, Anna! Just learn it! This message was sent by Gromcode
+
+const messanger2 = createMessenger();
+messanger2.setMessage("You are learning JS and you do it well");
+messanger2.sendMessage("Michael"); // ===> Hello, Michael! You are learning JS and you do it well! This message was sent by Gromcode
+
+const messanger3 = createMessenger();
+messanger3.setMessage("The weather is amazing today");
+messanger3.setSender("Gromcode");
+messanger3.sendMessage("Alex"); // ===> Hello, Alex! The weather is amazing today! This message was sent by Anna
