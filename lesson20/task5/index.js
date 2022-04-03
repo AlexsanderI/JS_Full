@@ -1,40 +1,70 @@
-class Order {
-  constructor(price, city, type) {
-    this.id = `${(Math.random() * 1000).toFixed()}`;
-    this.price = price;
-    this.city = city;
-    this.type = type;
-    this.isConfirmed = false;
-    this.dateCreated = new Date();
+/* eslint-disable max-classes-per-file */
+
+class User {
+  constructor(id, name, sessionId) {
+    this._id = id;
+    this._name = name;
+    this._sessionId = sessionId;
+  }
+  get id() {
+    return `${this._id}`;
   }
 
-  checkPrice() {
-    return this.price > 1000 || false;
+  get name() {
+    return `${this._name}`;
   }
 
-  confirmOrder() {
-    if (this.isConfirmed !== true) {
-      this.isConfirmed = true;
-      this.dateConfirmed = new Date();
-    }
+  get sessionId() {
+    return `${this._sessionId}`;
   }
 
-  isValidType() {
-    return this.type === "Buy" || this.type === "Sell";
+  // put your code here
+}
+
+class UserRepository {
+  constructor(users) {
+    this._users = Object.freeze(users);
+  }
+  // put your code here
+  get users() {
+    return this._users;
+  }
+  getUserNames() {
+    return this.users.map((user) => user.name);
+  }
+  getUserIds() {
+    return this.users.map((user) => user._id);
+  }
+
+  getUserNameById(id) {
+    return this.users.find((user) => user._id === id).name;
   }
 }
 
-const order1 = new Order(2, "Kharkov", "Buy", 40);
-order1.checkPrice();
-order1.confirmOrder();
-order1.isValidType();
-console.log(order1);
+// examples
+const user = new User("1", "Tom", "session-id");
 
-const order2 = new Order(200, "Odesa", "SeFXGll");
-order2.confirmOrder();
-order2.isValidType();
-console.log(order2);
+// получить свойства можем
+console.log(user.id); // ===> '1'
+console.log(user.name); // ===> 'Tom'
+console.log(user.sessionId); // ===> 'session-id'
 
-const order3 = new Order(230, "Kiev", "BuyKD;NM");
-order2.confirmOrder();
-console.log(order3);
+// но изменить эти свойства нельзя
+user.name = "Bob"; // пытаемся изменить старое значение
+console.log(user.name); // ===> 'Tom' - но изменение проигнорировано, так как setter отсутствует
+
+const user1 = new User("1", "Alan", "1");
+user1._name = "Ruslan";
+user1._sessionId = "256";
+user1._id = "25";
+const user2 = new User("2", "Alex", "2");
+const user3 = new User("3", "Roman", "3");
+const user4 = new User("4", "Andrey", "4");
+const user5 = new User("5", "Vasiliy", "5");
+
+const newRepo = new UserRepository([user1, user2, user3, user4, user5]);
+
+console.log(newRepo);
+console.log(newRepo.getUserNames());
+console.log(newRepo.getUserIds());
+console.log(newRepo.getUserNameById("2"));
