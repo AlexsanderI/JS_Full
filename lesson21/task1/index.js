@@ -6,7 +6,7 @@ const tasks = [
   { text: "Buy meat", done: true },
 ];
 
-const renderTasks = (tasksList) => {
+export const renderTasks = (tasksList) => {
   const listElem = document.querySelector(".list");
 
   const listItemsElements = tasksList
