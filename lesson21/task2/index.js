@@ -3,8 +3,9 @@ export function getTitleElement() {
   console.dir(titleElem);
   return titleElem;
 }
-export function getTitleElement();
-function getInputElement() {
+getTitleElement();
+
+export function getInputElement() {
   const inputElem = document.querySelector('[type = "text"]');
   console.dir(inputElem);
   return inputElem;
