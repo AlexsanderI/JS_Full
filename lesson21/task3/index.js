@@ -1,28 +1,15 @@
-class Wallet {
-  _balance = 0;
-  getBalance() {
-    return this._balance;
-  }
-
-  deposit(amount) {
-    this._balance += amount;
-  }
-
-  withdraw(amount) {
-    if (amount > this._balance) {
-      console.log("No enough funds");
-      return;
-    }
-    this._balance -= amount;
-  }
+function getItemsList() {
+  const elementsList = document.querySelectorAll(".technology");
+  console.dir(elementsList);
+  return elementsList;
 }
 
-const wallet1 = new Wallet();
-wallet1.deposit(20);
-console.log(wallet1.getBalance());
-wallet1.deposit(20);
-wallet1.deposit(20);
-console.log(wallet1.getBalance());
-// wallet1.withdraw(70);
-// console.log(wallet1.getBalance());
-wallet1.withdraw(170);
+getItemsList();
+
+function getItemsArray() {
+  const elementArray = Array.from(document.querySelectorAll(".tool"));
+  console.dir(elementArray);
+  return elementArray;
+}
+
+getItemsArray();
