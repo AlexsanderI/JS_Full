@@ -3,25 +3,25 @@ export function getTitle() {
   console.log(text);
   return text;
 }
-getTitle();
+// getTitle();
 
 export function getDescription() {
   const inner = document.querySelector(".about").innerText;
   console.log(inner);
   return inner;
 }
-getDescription();
+// getDescription();
 
 export function getPlans() {
   const inner = document.querySelector(".plans").innerHTML;
   console.log(inner);
   return inner;
 }
-getPlans();
+// getPlans();
 
 export function getGoal() {
-  const outer = document.querySelector(".goal").outerHTML;
+  const outer = document.querySelector("goal").outerHTML;
   console.log(outer);
   return outer;
 }
-getGoal();
+// getGoal();
