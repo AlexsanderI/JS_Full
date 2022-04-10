@@ -20,8 +20,8 @@ export function getPlans() {
 // getPlans();
 
 export function getGoal() {
-  const outer = document.querySelector("goal").outerHTML;
+  const outer = document.querySelector(".goal").outerHTML;
   console.log(outer);
   return outer;
 }
-// getGoal();
+getGoal();
