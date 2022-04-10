@@ -24,4 +24,4 @@ export function getGoal() {
   console.log(outer);
   return outer;
 }
-getGoal();
+// getGoal();
