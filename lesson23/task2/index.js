@@ -1,70 +1,68 @@
-function setButton(buttonText) {
-  const newText = (document.querySelector('.arena').innerHTML = buttonText);
-  return newText;
-}
-setButton('<div class= "sector"></div></div>');
+const numbers = (from, to) => {
+  const result = [];
 
-// let addSector = document.querySelector('.page');
-// addSector.classList.add('.sector');
+  for (let index = from; index <= to; index += 1) {
+    result.push(index);
+  }
 
-const sector = [
-  { line: '', seat: '' },
-  { line: '', seat: '' },
-  { line: '', seat: '' },
-  { line: '', seat: '' },
-  { line: '', seat: '' },
-  { line: '', seat: '' },
-  { line: '', seat: '' },
-  { line: '', seat: '' },
-  { line: '', seat: '' },
-];
-
-const renderTasks = (tasksList) => {
-  const listElem = document.querySelector('.sector');
-
-  const listItemsElements = tasksList.map(({ line }) => {
-    const listItemElem = document.createElement('div');
-    listItemElem.classList.add('sector__line');
-
-    const listItemsSeat = document.createElement('div');
-    listItemsSeat.classList.add('sector__seat');
-    listItemElem.append(listItemsSeat, line);
-
-    return listItemElem;
-  });
-
-  listElem.append(...listItemsElements);
+  return result;
 };
-renderTasks(sector);
 
-const renderTasksB = (tasksList) => {
-  const listElem = document.querySelector('.sector__line');
+const sectorSeat = () =>
+  numbers(1, 10)
+    .map(
+      (seatNumber) =>
+        `<div
+    class = 'sector__seat'
+    data-seat-number="${seatNumber}"
+    ></div>
+    `
+    )
+    .join('');
 
-  const listItemsElements = tasksList.map(({ line }) => {
-    const listItemElem = document.createElement('div');
-    listItemElem.classList.add('sector__seat');
-
-    // const listItemsSeat = document.createElement('div');
-    // listItemsSeat.classList.add('sector__seat');
-    listItemElem.append(line);
-
-    return listItemElem;
-  });
-
-  listElem.append(...listItemsElements);
+const sectorLine = () => {
+  const seatsString = sectorSeat();
+  return numbers(1, 10)
+    .map(
+      (lineNumber) =>
+        `<div
+    class = "sector__line"
+    data-line-number="${lineNumber}"
+    >${seatsString}</div>
+    `
+    )
+    .join('');
 };
-renderTasksB(sector);
 
-// const seatTasks = (tasksSeat) => {
-//   const listSeat = document.querySelector('.sector__line');
+const arenaElem = document.querySelector('.arena');
 
-//   const listItemsSeats = tasksSeat.map(({ seat }) => {
-//     const listItemsSeat = document.createElement('div');
-//     listItemsSeat.classList.add('sector__seat');
-//     listItemsSeat.append(seat);
-//     return listItemsSeat;
-//   });
+const renderArena = () => {
+  const linesString = sectorLine();
 
-//   listSeat.append(...listItemsSeats);
-// };
-// seatTasks(sector);
+  const sectorsString = numbers(1, 3)
+    .map(
+      (sectorNumber) =>
+        `<div
+    class = "sector"
+    data-sector-number="${sectorNumber}"
+    >${linesString}</div>
+    `
+    )
+    .join('');
+  arenaElem.innerHTML = sectorsString;
+};
+const onSeatSelect = (event) => {
+  const isSeat = event.target.classList.contains('sector__seat');
+  if (!isSeat) {
+    return;
+  }
+  const { seatNumber } = event.target.dataset;
+  const { lineNumber } = event.target.closest('.sector__line').dataset;
+  const { sectorNumber } = event.target.closest('.sector').dataset;
+
+  const selectedSeatElem = document.querySelector('.board__selected-seat');
+  selectedSeatElem.textContent = `S ${sectorNumber} - L ${lineNumber} - S ${seatNumber}`;
+};
+
+arenaElem.addEventListener('click', onSeatSelect);
+renderArena();
