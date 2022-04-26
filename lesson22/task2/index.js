@@ -1,14 +1,4 @@
-function getTitleElement() {
-  const titleElem = document.querySelector(".title");
-  console.dir(titleElem);
-  return titleElem;
-}
-getTitleElement();
+const createBtn = document.querySelector('.create-btn');
+const alertDone = () => alert('done');
 
-function getInputElement() {
-  const inputElem = document.querySelector('[type = "text"]');
-  console.dir(inputElem);
-  return inputElem;
-}
-
-getInputElement();
+createBtn.addEventListener('click', alertDone);

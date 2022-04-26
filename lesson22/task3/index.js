@@ -1,15 +1,4 @@
-function getItemsList() {
-  const elementsList = document.querySelectorAll(".technology");
-  console.dir(elementsList);
-  return elementsList;
-}
+const inputElem = document.querySelector('.text-input');
+const events = () => console.log(inputElem.value);
 
-getItemsList();
-
-function getItemsArray() {
-  const elementArray = Array.from(document.querySelectorAll(".tool"));
-  console.dir(elementArray);
-  return elementArray;
-}
-
-getItemsArray();
+inputElem.addEventListener('change', events);

@@ -1,5 +1,5 @@
 function clearList() {
-  const newText = (document.querySelector(".categories").innerHTML = "");
+  const newText = (document.querySelector('.categories').innerHTML = '');
   return newText;
 }
 clearList();
