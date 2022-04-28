@@ -12,9 +12,8 @@ const tasks = [
 ];
 
 function getRandomInt() {
-  return Math.floor(Math.random() * 100);
+  return Math.floor(Math.random() * 100).toFixed();
 }
-
 const listElem = document.querySelector('.list');
 
 const renderTasks = (tasksList) => {
@@ -22,13 +21,15 @@ const renderTasks = (tasksList) => {
     .sort((a, b) => a.done - b.done)
     .map(({ text, done, id }) => {
       const listItemElem = document.createElement('li');
-      listItemElem.classList.add('list__item');
       listItemElem.dataset.id = id;
+      // console.log(listItemElem.dataset.id);
+      listItemElem.classList.add('list__item');
 
       const checkbox = document.createElement('input');
+      checkbox.dataset.id = id;
       checkbox.setAttribute('type', 'checkbox');
 
-      checkbox.dataset.id = id;
+      // console.log(checkbox.dataset.id);
       checkbox.checked = done;
       checkbox.classList.add('list__item-checkbox');
       if (done) {
@@ -48,7 +49,12 @@ const box = document.querySelectorAll('.list__item-checkbox');
 function doneBox(event) {
   const elId = event.target.dataset.id;
   // const boxId = event.target.checked;
-  const checkId = tasks.find((el) => el.id === elId);
+  // console.log(elId);
+  const checkId = tasks.find((el) => {
+    console.log(el.id, elId);
+    el.id === elId;
+  });
+
   if (event.target.checked) {
     checkId.done = true;
   } else {
@@ -56,9 +62,10 @@ function doneBox(event) {
   }
   listElem.innerHTML = '';
   renderTasks(tasks);
+  taskInput.value = '';
 }
 listElem.addEventListener('click', doneBox);
-
+// doneBox();
 // function select(even) {
 //   console.log(even.target.checked);
 // }
