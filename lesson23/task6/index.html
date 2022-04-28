@@ -2,67 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Chess Game</title>
-    <script>
-      function drawBoard() {
-        let row = 1;
-        for (let i = 1; i <= 64; i++) {
-          if (row % 2 == 0) {
-            // row 2,4,6,8
-            var color = i % 2 == 0 ? 'whiteSquare' : 'blackSquare';
-          } else {
-            // row 1,3,5,7
-            var color = i % 2 == 0 ? 'blackSquare' : 'whiteSquare';
-          }
-          let square = document.createElement('div');
-          square.className = color;
-          if (i % 8 == 0) {
-            //  new row
-            square.style = 'clear:all';
-            row++;
-          }
-          gameBoardBorder.appendChild(square);
-        }
-      }
-    </script>
-    <style>
-      #gameBoardBorder {
-        width: 480px;
-        height: 480px;
-        border: solid;
-        border-color: black;
-        border-width: 2px;
-        float: left;
-      }
-
-      h1 {
-        text-align: center;
-        font-family: sans-serif;
-      }
-
-      .whiteSquare {
-        width: 60px;
-        height: 60px;
-        background-color: white;
-        float: left;
-      }
-
-      .blackSquare {
-        width: 60px;
-        height: 60px;
-        background-color: black;
-        float: left;
-      }
-
-      body {
-        background-color: lightblue;
-      }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+      integrity="sha256-WAgYcAck1C1/zEl5sBl5cfyhxtLgKGdpI3oKyJffVRI="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
   </head>
-  <body onload="drawBoard()">
-    <h1>Chess Board</h1>
-    <div id="gameBoardBorder">
-      <!-- Noting more needed to be done here, rest will be in the css -->
-    </div>
+
+  <body>
+    <h1 class="title">Todo List</h1>
+    <main class="todo-list">
+      <div class="actions">
+        <input class="task-input" type="text" />
+        <button class="btn create-task-btn">Create</button>
+      </div>
+      <ul class="list"></ul>
+    </main>
+
+    <script src="index.js"></script>
   </body>
 </html>
