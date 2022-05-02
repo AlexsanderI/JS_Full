@@ -54,8 +54,9 @@ const box = document.querySelectorAll('.list__item-checkbox');
 function doneBox(event) {
   const elId = event.target.dataset.id;
   // const boxId = event.target.checked;
-  // console.log(elId);
+  console.log(elId);
   const checkId = tasks.find((el) => Number(el.id) === Number(elId));
+  // console.log(Number(el.id), Number(elId));
   console.log(checkId.done);
   if (event.target.checked) {
     checkId.done = true;
