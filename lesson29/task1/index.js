@@ -6,18 +6,20 @@ const addImage = (imgSrc, callback) => {
   const containerElem = document.querySelector('.page');
   containerElem.append(imgElem);
 
-  const onImageLoaded = () => {
-    const { width, height } = imgElem;
-    callback(null, { width, height });
-  };
+  // const onImageLoaded = () => {
+  //   const { width, height } = imgElem;
+  //   callback(null, { width, height });
+  // };
 
-  imgElem.addEventListener('load', onImageLoaded);
+  // imgElem.addEventListener('load', onImageLoaded);
+
+  imgElem.addEventListener('load', () => callback(null, imgElem));
 
   imgElem.addEventListener('error', () => callback('Image load is failed'));
 };
 
-const imgSrc =
-  'https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg';
+// const imgSrc =
+//   'https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg';
 
 // callack function
 const onImageLoaded = (error, imgElem) => {
@@ -32,10 +34,10 @@ const onImageLoaded = (error, imgElem) => {
   sizeElem.textContent = `${width} x ${height}`;
 };
 
-addImage(imgSrc, onImageLoaded);
+// addImage(imgSrc, onImageLoaded);
 // onImageLoaded();
 // examples
-// addImage(
-//   'https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg',
-//   onImageLoaded,
-// );
+addImage(
+  'https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg',
+  onImageLoaded
+);
