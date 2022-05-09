@@ -1,4 +1,4 @@
-export const addImage = (imgSrc) => {
+const addImage = (imgSrc) => {
   const p = new Promise((resolve, reject) => {
     const imgElem = document.createElement('img');
     imgElem.setAttribute('alt', 'My Photo');
@@ -22,8 +22,8 @@ export const addImage = (imgSrc) => {
   return p;
 };
 
-const imgSrc =
-  'https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg';
-const result = addImage(imgSrc);
+// const imgSrc =
+//   'https://p.bigstockphoto.co/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg';
+// const result = addImage(imgSrc);
 
 result.catch((error) => console.log(error));
