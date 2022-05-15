@@ -1,14 +1,18 @@
-const obj = {
-  number: 17,
-  getNumber: function () {
-    console.log(this.number);
-    console.log(obj.number);
-  },
-};
+/*
+ * failedPromise должен зареджектить ошибку new Error('Oops, error!');
+ * Ответьте себе на вопрос, какой тип данных имеет переменная failedPromise
+ */
 
-// obj.getNumber();
+const failedPromise = new Promise((resolve, reject) => {
+  /* ...code here */
+  reject(new Error('Oops, error!'));
+});
 
-// const func = obj.getNumber();
-const func = obj.getNumber.bind(obj);
-func();
-// console.log(func());
+/*
+ * выведите в консоль ошибку в ф-ции onError
+ */
+
+failedPromise.catch(function onError(error) {
+  /* ...code here */
+  console.log(error);
+});
