@@ -26,18 +26,20 @@ function createUser(event) {
     name: nameInput.value,
     password: passwordInput.value,
   };
-  fetch(baseUrl, {
+  const promise = fetch(baseUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
     body: JSON.stringify(user),
-  })
-    .then((res) => res.json)
-    .then((user) => {
-      console.log(user);
-
-      alert(user);
+  });
+  promise
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      console.log(JSON.stringify(res));
+      alert(JSON.stringify(res));
       formElem.reset();
     });
 }
