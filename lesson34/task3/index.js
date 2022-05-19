@@ -34,8 +34,8 @@ function createUser(event) {
     body: JSON.stringify(user),
   })
     .then((res) => res.json)
-    .then(() => {
-      //   console.log(user);
+    .then((user) => {
+      console.log(user);
 
       alert(JSON.stringify(user));
       formElem.reset();
