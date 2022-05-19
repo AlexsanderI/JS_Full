@@ -37,7 +37,7 @@ function createUser(event) {
     .then((user) => {
       console.log(user);
 
-      alert(JSON.stringify(user));
+      alert(user);
       formElem.reset();
     });
 }
