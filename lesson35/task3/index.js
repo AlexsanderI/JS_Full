@@ -12,7 +12,7 @@ renderUserData(defaulUser);
 
 const showUserBtnElem = document.querySelector('.name-form__btn');
 const userNameInputElem = document.querySelector('.name-form__input');
-const listElm = document.querySelector('.repo-list');
+// const listElm = document.querySelector('.repo-list');
 
 const onScreanUser = () => {
   showSpinner();

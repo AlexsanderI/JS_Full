@@ -1,48 +1,37 @@
-const baseUrl = 'https://62840a40a48bd3c40b6a3c4f.mockapi.io/api/v1/users';
+import { fetchUserData, fetchRepositoris } from './gateways.js';
+import { renderUserData } from './users.js';
+import { renderReport, cleanReposList } from './repo.js';
+import { showSpinner, hiddenSpinner } from './spinner.js';
 
-const emailInput = document.querySelector('#email');
-const nameInput = document.querySelector('div.form-control input[name = name]');
-const passwordInput = document.querySelector(
-  'div.form-control input[name = password]'
-);
-
-const formElem = document.querySelector('.login-form');
-const submitBtm = document.querySelector('.submit-button');
-
-const avalebForm = () => {
-  if (
-    emailInput.reportValidity() &&
-    nameInput.reportValidity() &&
-    passwordInput.reportValidity()
-  ) {
-    submitBtm.disabled = false;
-  }
+const defaultUser = {
+  avatar_url: 'https://avatars3.githubusercontent.com/u10001',
+  name: '',
+  location: '',
 };
 
-function createUser(event) {
-  event.preventDefault();
-  const user = {
-    email: emailInput.value,
-    name: nameInput.value,
-    password: passwordInput.value,
-  };
-  const promise = fetch(baseUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-    body: JSON.stringify(user),
-  });
-  promise
-    .then((res) => {
-      return res.json();
-    })
-    .then((res) => {
-      console.log(JSON.stringify(res));
-      alert(JSON.stringify(res));
-      formElem.reset();
-    });
-}
+renderUserData(defaultUser);
 
-formElem.addEventListener('input', avalebForm);
-formElem.addEventListener('submit', createUser);
+const showUserBtnElem = document.querySelector('.name-form__btn');
+const userNameInputElem = document.querySelector('.name-form__input');
+
+const onScreanUser = () => {
+  cleanReposList();
+  showSpinner();
+  const userName = userNameInputElem.value;
+  fetchUserData(userName)
+    .then((userData) => {
+      renderUserData(userData);
+      return userData.repos_url;
+    })
+    .then((url) => fetchRepositoris(url))
+    .then((reposList) => {
+      renderReport(reposList);
+      hiddenSpinner();
+    })
+    .catch((err) => {
+      hiddenSpinner();
+      alert(err.message);
+    });
+};
+
+showUserBtnElem.addEventListener('click', onScreanUser);
