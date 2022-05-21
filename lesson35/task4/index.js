@@ -3,13 +3,13 @@ import { renderUserData } from './users.js';
 import { renderReport, cleanReposList } from './repo.js';
 import { showSpinner, hiddenSpinner } from './spinner.js';
 
-const defaultUser = {
-  avatar_url: 'https://avatars3.githubusercontent.com/u10001',
-  name: '',
-  location: '',
-};
+// const defaultUser = {
+//   avatar_url: 'https://avatars3.githubusercontent.com/u10001',
+//   name: '',
+//   location: '',
+// };
 
-renderUserData(defaultUser);
+// renderUserData(defaultUser);
 
 const showUserBtnElem = document.querySelector('.name-form__btn');
 const userNameInputElem = document.querySelector('.name-form__input');
