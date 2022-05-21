@@ -9,16 +9,16 @@ const onSearchUser = () => {
   showSpinner();
   const userName = userNameFormInput.value;
   fetchUserData(userName)
-    .then(userData => {
+    .then((userData) => {
       renderUserData(userData);
       return userData.repos_url;
     })
-    .then(url => fetchReposData(url))
-    .then(reposList => {
+    .then((url) => fetchReposData(url))
+    .then((reposList) => {
       renderRepos(reposList);
       hideSpinner();
     })
-    .catch(err => {
+    .catch((err) => {
       alert(err.message);
     })
     .finally(() => {
@@ -27,3 +27,4 @@ const onSearchUser = () => {
 };
 
 showUserBtnElem.addEventListener('click', onSearchUser);
+// test
