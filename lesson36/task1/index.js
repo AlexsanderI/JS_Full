@@ -1,32 +1,34 @@
-const getValueWithDelay = (value, delay) =>
-  new Promise((resolve, reject) => {
-    if (value === !isNaN(value)) {
-      setTimeout(() => {
-        reject(new Error("Can't calculate"));
-      }, delay);
-    } else {
-      setTimeout(() => {
-        console.log(value);
-        resolve(value);
-      }, delay);
+// 'use strict';
+
+// export const fetchUser = (userId) => {
+//   // put your code here
+// };
+
+// async function func() {
+//   const promise = new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve(17);
+//     }, 1000);
+//   });
+//   const result = await promise;
+//   console.log(result);
+//   return 1;
+// }
+
+// const result = func();
+
+const getUser = async (userId) => {
+  try {
+    const response = await fetch(`https://api.github.com/user/${userId}`);
+    if (!response.ok) {
+      return null;
     }
-  });
-
-const asyncNumber1 = getValueWithDelay('w', 1000);
-const asyncNumber2 = getValueWithDelay(1, 2000);
-const asyncNumber3 = getValueWithDelay(53, 3000);
-const asyncNumber4 = getValueWithDelay(34, 4000);
-
-const getSum = (numbers) => numbers.reduce((acc, num) => acc + num, 0);
-
-const asyncSum = (...asyncNumbers) => {
-  return Promise.all(asyncNumbers)
-    .then((numbers) => getSum(numbers))
-    .catch((error) => getSum(error));
+    return await response.json();
+  } catch (error) {
+    throw new Error('Failed to fetch user');
+  }
 };
 
-asyncSum(asyncNumber1, asyncNumber2, asyncNumber3, asyncNumber4).then(
-  (result) => console.log(result)
-);
-
-const { doc } = require('prettier');
+getUser('facebook')
+  // .then((userData) => console.log(userData))
+  .catch((err) => alert(err.message));

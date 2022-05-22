@@ -4,7 +4,7 @@ import { renderRepos, cleanReposList } from './crs/repos.js';
 import { showSpinner, hiddenSpinner } from './crs/spinner.js';
 
 const defaulUser = {
-  avatar_url: 'https://avatars.githubusercontent.com/u10001',
+  avatar_url: 'https://avatars3.githubusercontent.com/u10001',
   name: '',
   location: '',
 };
