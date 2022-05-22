@@ -1,26 +1,33 @@
-const promiseNumber1 = Promise.resolve(67);
-const promiseNumber2 = Promise.resolve(23);
-const promiseNumber3 = Promise.resolve(8);
+import { fetchUserData, fetchRepositoris } from './gateways.js';
+import { renderUserData } from './users.js';
+import { renderReport, cleanReposList } from './repo.js';
+import { showSpinner, hiddenSpinner } from './spinner.js';
 
-/*
- * создай промис и присвой переменной resultPromise
- * чтобы в консоль вывелась сумма всех чисел из трех промисов
- */
+// const defaultUser = {
+//   avatar_url: 'https://avatars3.githubusercontent.com/u10001',
+//   name: '',
+//   location: '',
+// };
 
-// update code below
+// renderUserData(defaultUser);
 
-const resultPromise = Promise.all([
-  promiseNumber1,
-  promiseNumber2,
-  promiseNumber3,
-]);
+const showUserBtnElem = document.querySelector('.name-form__btn');
+const userNameInputElem = document.querySelector('.name-form__input');
 
-resultPromise
-  .then((numbersList) => {
-    console.log(numbersList);
-    const sum = numbersList.reduce((acc, num) => acc + num, 0);
-    return sum;
-  })
-  .then((result) => {
-    console.log(result); // 98
-  });
+const onScreanUser = async () => {
+  showSpinner();
+  cleanReposList();
+  try {
+    const userName = userNameInputElem.value;
+    const userData = await fetchUserData(userName);
+    renderUserData(userData);
+    const reposList = await fetchRepositoris(userData.repos_url);
+    renderReport(reposList);
+  } catch (err) {
+    alert(err.message);
+  } finally {
+    hiddenSpinner();
+  }
+};
+
+showUserBtnElem.addEventListener('click', onScreanUser);
